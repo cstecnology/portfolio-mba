@@ -1,1 +1,581 @@
-# portfolio-mba
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio — MBA em Inteligência Artificial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b1220;
+    --bg-panel: #121b2e;
+    --bg-panel-2: #17223a;
+    --text: #e8ecf4;
+    --text-muted: #8fa0b8;
+    --gold: #d4a24c;
+    --teal: #4fd1c5;
+    --border: rgba(232,236,244,0.09);
+    --serif: 'Fraunces', serif;
+    --sans: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --maxw: 1120px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection{ background: var(--gold); color:#0b1220; }
+
+  a{ color:inherit; }
+
+  img{max-width:100%; display:block;}
+
+  .wrap{ max-width: var(--maxw); margin:0 auto; padding: 0 28px; }
+
+  :focus-visible{
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position: fixed; top:0; left:0; right:0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(11,18,32,0.72);
+    border-bottom: 1px solid var(--border);
+  }
+  header .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height: 68px;
+  }
+  .brand{
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212,162,76,0.15);
+  }
+  nav{ display:flex; gap: 28px; }
+  nav a{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    text-decoration:none;
+    color: var(--text-muted);
+    letter-spacing:0.03em;
+    transition: color .2s ease;
+  }
+  nav a:hover{ color: var(--teal); }
+
+  .nav-toggle{ display:none; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position: relative;
+    padding: 168px 0 96px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom: 22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 22px; height:1px;
+    background: var(--gold);
+  }
+  h1{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    max-width: 620px;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero p.lede{
+    margin-top: 22px;
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 480px;
+  }
+  .hero-actions{
+    margin-top: 34px;
+    display:flex; gap: 14px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 12px 22px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    display:inline-flex; align-items:center; gap:8px;
+    transition: transform .18s ease, background .18s ease, border-color .18s ease;
+  }
+  .btn-primary{
+    background: var(--gold);
+    color: #0b1220;
+    font-weight: 500;
+  }
+  .btn-primary:hover{ transform: translateY(-1px); }
+  .btn-ghost{
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-ghost:hover{ border-color: var(--teal); color: var(--teal); }
+
+  /* signature: attention matrix */
+  .matrix-wrap{
+    position:relative;
+    aspect-ratio: 1/1;
+    max-width: 380px;
+    margin-left:auto;
+  }
+  .matrix{
+    display:grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 5px;
+    width:100%; height:100%;
+  }
+  .cell{
+    border-radius: 3px;
+    background: var(--bg-panel-2);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%, 100% { opacity: .18; }
+    50% { opacity: .85; }
+  }
+  .matrix-caption{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align:right;
+    margin-top: 12px;
+    letter-spacing: 0.03em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cell{ animation: none; opacity: .5; }
+    html{ scroll-behavior: auto; }
+  }
+
+  /* ---------- sobre ---------- */
+  .sobre{
+    padding: 96px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .sobre .wrap{
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    gap: 56px;
+  }
+  .section-label{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: sticky;
+    top: 96px;
+    align-self:start;
+  }
+  .section-label .num{ color: var(--gold); margin-right:8px; }
+  .sobre blockquote{
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--text);
+    max-width: 700px;
+  }
+  .sobre .note{
+    margin-top: 26px;
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 620px;
+  }
+  .meta-row{
+    margin-top: 32px;
+    display:flex; gap: 28px; flex-wrap:wrap;
+  }
+  .meta-item{
+    font-family: var(--mono);
+    font-size: 12.5px;
+  }
+  .meta-item span{
+    display:block;
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  /* ---------- trabalhos ---------- */
+  .trabalhos{ padding: 96px 0; border-bottom: 1px solid var(--border); }
+  .trabalhos-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    flex-wrap:wrap; gap: 20px;
+    margin-bottom: 44px;
+  }
+  h2{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+  }
+  .filters{ display:flex; gap:8px; flex-wrap:wrap; }
+  .filter-btn{
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 7px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all .18s ease;
+  }
+  .filter-btn:hover{ border-color: var(--teal); color: var(--teal); }
+  .filter-btn.active{
+    background: var(--teal);
+    border-color: var(--teal);
+    color: #0b1220;
+    font-weight: 500;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .card{
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 26px;
+    display:flex; flex-direction:column;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .card:hover{ border-color: rgba(212,162,76,0.4); transform: translateY(-2px); }
+  .card-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    margin-bottom: 16px;
+  }
+  .tag{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.03em;
+    border: 1px solid rgba(212,162,76,0.3);
+    padding: 4px 9px;
+    border-radius: 100px;
+  }
+  .card-date{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .card h3{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    line-height:1.3;
+  }
+  .card p{
+    font-size: 14px;
+    color: var(--text-muted);
+    flex:1;
+    margin-bottom: 18px;
+  }
+  .card-link{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--teal);
+    text-decoration: none;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .card-link:hover{ text-decoration: underline; }
+  .card-link.disabled{
+    color: var(--text-muted);
+    pointer-events:none;
+  }
+
+  /* ---------- ferramentas ---------- */
+  .ferramentas{ padding: 96px 0; border-bottom: 1px solid var(--border); }
+  .tool-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  .tool{
+    background: var(--bg);
+    padding: 20px 18px;
+    display:flex; flex-direction:column; gap: 10px;
+  }
+  .tool .level{
+    display:flex; gap:3px;
+  }
+  .tool .level span{
+    width: 14px; height: 4px; border-radius:2px;
+    background: var(--bg-panel-2);
+  }
+  .tool .level span.on{ background: var(--teal); }
+  .tool .name{ font-family: var(--mono); font-size: 12.5px; }
+
+  /* ---------- footer ---------- */
+  footer{ padding: 72px 0 56px; }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+  }
+  footer h2{ max-width: 460px; margin-bottom: 18px; }
+  .contact-links{ display:flex; flex-direction:column; gap:10px; }
+  .contact-links a{
+    font-family: var(--mono);
+    font-size: 13.5px;
+    text-decoration:none;
+    color: var(--text-muted);
+    border-bottom: 1px solid transparent;
+    width: fit-content;
+  }
+  .contact-links a:hover{ color: var(--teal); border-color: var(--teal); }
+  .foot-note{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 860px){
+    .hero .wrap{ grid-template-columns: 1fr; }
+    .matrix-wrap{ margin: 40px auto 0; max-width: 260px; }
+    .sobre .wrap{ grid-template-columns: 1fr; }
+    .section-label{ position:static; }
+    nav{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>Claudino Sales · MBA em IA para Gestão Pública · Portfólio acadêmico</div>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#trabalhos">Trabalhos</a>
+      <a href="#ferramentas">Ferramentas</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">MBA em Inteligência Artificial</div>
+      <h1>Um repositório de estudos, protótipos e <em>experimentos</em> em IA.</h1>
+      <p class="lede">Reúno aqui os trabalhos produzidos ao longo da pós — de projetos aplicados a estudos de caso — organizados por disciplina e período.</p>
+      <div class="hero-actions">
+        <a href="#trabalhos" class="btn btn-primary">Ver trabalhos</a>
+        <a href="#contato" class="btn btn-ghost">Contato</a>
+      </div>
+    </div>
+    <div>
+      <div class="matrix-wrap">
+        <div class="matrix" id="matrix"></div>
+      </div>
+      <div class="matrix-caption">matriz de atenção — ilustrativa</div>
+    </div>
+  </div>
+</section>
+
+<section class="sobre" id="sobre">
+  <div class="wrap">
+    <div class="section-label"><span class="num">01</span>Sobre</div>
+    <div>
+      <blockquote>"Cada trabalho aqui é um recorte de um problema real, resolvido com os métodos que a pós me deu para pensar."</blockquote>
+      <p class="note">Este espaço reúne os principais trabalhos, artigos e projetos desenvolvidos durante o MBA em Inteligência Artificial — cobrindo temas como machine learning, LLMs, ética em IA e aplicações de dados para a gestão pública.</p>
+      <div class="meta-row">
+        <div class="meta-item"><span>Instituição</span>Unipace - Escola Superior do Parlamento Cearense</div>
+        <div class="meta-item"><span>Início</span>2026</div>
+        <div class="meta-item"><span>Status</span>Em andamento</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trabalhos" id="trabalhos">
+  <div class="wrap">
+    <div class="trabalhos-head">
+      <h2>Trabalhos</h2>
+      <div class="filters" id="filters"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="ferramentas" id="ferramentas">
+  <div class="wrap">
+    <div class="section-label"><span class="num">02</span>Ferramentas</div>
+    <h2 style="margin-top:18px;">Stack de estudo</h2>
+    <div class="tool-grid" id="toolgrid"></div>
+  </div>
+</section>
+
+<footer id="contato">
+  <div class="wrap">
+    <div>
+      <h2>Vamos conversar sobre IA, dados ou os trabalhos daqui.</h2>
+      <div class="contact-links">
+        <a href="mailto:seuemail@exemplo.com">claudino.barbosa3@gmail.com</a>
+        <a href="https://linkedin.com/in/seu-perfil" target="_blank" rel="noopener">linkedin.com/in/seu-perfil</a>
+        <a href="https://github.com/cstecnology" target="_blank" rel="noopener">https://github.com/cstecnology</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="foot-note">Portfólio acadêmico — MBA em Inteligência Artificial · atualizado manualmente</div>
+  </div>
+</footer>
+
+<script>
+  // ---------------------------------------------------------------
+  // EDITE AQUI: adicione um objeto para cada trabalho da pós.
+  // "tag" = disciplina ou módulo (usado nos filtros automaticamente)
+  // "link" = deixe "" (vazio) se ainda não tiver link/arquivo
+  // ---------------------------------------------------------------
+  const trabalhos = [
+    {
+      tag: "Fundamentos",
+      data: "Módulo 01",
+      titulo: "IA Aplicada ao Setor Público no Exterior",
+      descricao: "Como um caso real de Inteligência Artificial adotado por um país estrangeiro poderia ser aplicado no Brasil.",
+      link: "https://www.image2url.com/r2/default/documents/1785783739894-b4dcda13-e0bd-470a-82c4-f2288e228102.pdf"
+    },
+    {
+      tag: "Ciência de Dados",
+      data: "Módulo 2",
+      titulo: "Dashboard de Despesas Parlamentares da ALECE no ano de 2025",
+      descricao: "Visualização interativa das despesas de gabinete por Deputado, Mês/Ano e Credor.",
+      link: "https://cstecnology.github.io/cienciadedados"
+    }
+  ];
+
+  const ferramentas = [
+    { nome: "Python", nivel: 4 },
+    { nome: "Pandas / NumPy", nivel: 4 },
+    { nome: "Scikit-learn", nivel: 3 },
+    { nome: "PyTorch", nivel: 2 },
+    { nome: "SQL", nivel: 3 },
+    { nome: "LLM APIs", nivel: 3 },
+    { nome: "Power BI", nivel: 3 },
+    { nome: "Excel avançado", nivel: 4 }
+  ];
+
+  // ---------- render matrix ----------
+  const matrix = document.getElementById('matrix');
+  for (let i = 0; i < 64; i++){
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    const isAccent = Math.random() > 0.7;
+    cell.style.background = isAccent
+      ? (Math.random() > 0.5 ? 'rgba(212,162,76,0.55)' : 'rgba(79,209,197,0.5)')
+      : '';
+    cell.style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
+    matrix.appendChild(cell);
+  }
+
+  // ---------- render trabalhos + filtros ----------
+  const grid = document.getElementById('grid');
+  const filtersEl = document.getElementById('filters');
+  const tags = ["Todos", ...new Set(trabalhos.map(t => t.tag))];
+  let active = "Todos";
+
+  function renderFilters(){
+    filtersEl.innerHTML = "";
+    tags.forEach(tag => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn' + (tag === active ? ' active' : '');
+      btn.textContent = tag;
+      btn.addEventListener('click', () => { active = tag; renderFilters(); renderGrid(); });
+      filtersEl.appendChild(btn);
+    });
+  }
+
+  function renderGrid(){
+    grid.innerHTML = "";
+    const list = active === "Todos" ? trabalhos : trabalhos.filter(t => t.tag === active);
+    list.forEach(t => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="tag">${t.tag}</span>
+          <span class="card-date">${t.data}</span>
+        </div>
+        <h3>${t.titulo}</h3>
+        <p>${t.descricao}</p>
+        ${t.link
+          ? `<a class="card-link" href="${t.link}" target="_blank" rel="noopener">Ver trabalho →</a>`
+          : `<span class="card-link disabled">Link em breve</span>`}
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  renderFilters();
+  renderGrid();
+
+  // ---------- render ferramentas ----------
+  const toolgrid = document.getElementById('toolgrid');
+  ferramentas.forEach(f => {
+    const el = document.createElement('div');
+    el.className = 'tool';
+    let bars = '';
+    for (let i = 1; i <= 4; i++){
+      bars += `<span class="${i <= f.nivel ? 'on' : ''}"></span>`;
+    }
+    el.innerHTML = `<div class="level">${bars}</div><div class="name">${f.nome}</div>`;
+    toolgrid.appendChild(el);
+  });
+</script>
+
+</body>
+</html>
